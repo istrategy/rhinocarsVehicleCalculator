@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/1main.css">
+    <script src="js/calc.js"></script>
+    <title>Rhinocars.co.za Calculator</title>
+</head>
+<body>
+    <div class="calc">
+        <div class="header">
+      
+        </div>
+        <h1>Car Finance Calculator</h1>
+        <p>
+            <label for="amount" >Car price</label>
+            <input type="text" id="amount" name="amount" placeholder="Car price" onchange="calcform()" onkeyup="cf()">
+        </p>
+
+        <p>
+            <label for="deposit">Deposit</label>
+            <input type="text" id="deposit" name="deposit" placeholder="Deposit"  onchange="calcform()" onkeyup="cf()">
+        </p>
+        <p>
+            <label for="trade_in">Trade In</label>
+            <input type="text" id="trade_in" name="trade_in" placeholder="Trade In"  onchange="calcform()" onkeyup="cf()">
+        </p>
+        <p>
+            <label for="amount_financed">Amount to be financed</label>
+            <input type="text" id="amount_financed" name="amount_financed" placeholder="Amount to be financed"  onchange="calcform()" onkeyup="cf()">
+        </p>
+        <p>
+            <label for="term">Payment term (months)</label>
+            <select tabindex="0" name="payment_term" id="payment_term" onchange="calcform()" onkeyup="cf()">
+                <option value="12"> 12 </option>
+                <option value="24"> 24 </option>
+                <option value="36"> 36 </option>
+                <option value="48"> 48 </option>
+                <option value="54"> 54 </option>
+                <option value="60" selected> 60 </option>
+                <option value="73"> 72 </option>
+ S           </select>
+        </p>
+
+        <p>
+            <label for="interest rate">Interest Rate %</label>
+            <input type="text" id="interest" value="12" name="interest" placeholder="Interest Rate %"  onchange="calcform()" onkeyup="cf()">
+        </p>
+
+        <p>
+            <label for="term">Payment per month</label>
+            <input type="text" id="payment" name="payment" placeholder="Payment per month">
+        </p>
+
+</body>
+</html>
