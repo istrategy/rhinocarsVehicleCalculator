@@ -8,20 +8,13 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css"
     />
-    <script
-      defer
-      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
-    ></script>
+    
   </head>
   <body>
     <section class="section">
       <div class="container">
         <div class="content">
-          <h1>Simple Loan Calculator</h1>
-          <p>
-            The Simple Loan Calculator will determine your estimated payments
-            for loan amounts, interest rates and terms.
-          </p>
+          <h1>RhinoCars Finance Calculator</h1>
         </div>
 
         <div class="columns">
@@ -34,7 +27,7 @@
                     <div class="level-left is-marginless">
                       <div class="level-item">
                         <p class="number">1</p>
-                        Loan Amount
+                        <b>Car Price</b>
                       </div>
                     </div>
 
@@ -43,9 +36,103 @@
                       <div class="level-item">
                         <div class="field">
                           <div class="control has-icons-left ">
-                            <input class="input" id="amount" type="number" />
+                            <input class="input" id="loan_amount" type="number"  onchange="calcform()" onkeyup="cf()" />
                             <span class="icon is-small is-left">
-                              <i class="fa fa-dollar-sign"></i>
+                              <b>R</b>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="level">
+                    <!-- Left side -->
+                    <div class="level-left is-marginless">
+                      <div class="level-item">
+                        <p class="number">2</p>
+                        Deposit
+                      </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                      <div class="level-item">
+                        <div class="field">
+                          <div class="control has-icons-left ">
+                            <input class="input" id="deposit" type="number"   onchange="calcform()" onkeyup="cf()"  />
+                            <span class="icon is-small is-left">
+                              <b>R</b>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="level">
+                    <!-- Left side -->
+                    <div class="level-left is-marginless">
+                      <div class="level-item">
+                        <p class="number">3</p>
+                        Trade In
+                      </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                      <div class="level-item">
+                        <div class="field">
+                          <div class="control has-icons-left ">
+                            <input class="input" id="trade_in" type="number"   onchange="calcform()" onkeyup="cf()" />
+                            <span class="icon is-small is-left">
+                              <b>R</b>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="level">
+                    <!-- Left side -->
+                    <div class="level-left is-marginless">
+                      <div class="level-item">
+                        <p class="number">4</p>
+                        Baloon payment 
+                      </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                      <div class="level-item">
+                        <div class="field">
+                          <div class="control has-icons-left ">
+                            <input class="input" id="balloon" type="number"   onchange="calcform()" onkeyup="cf()"  />
+                            <span class="icon is-small is-left">
+                              <b>R</b>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="level">
+                    <!-- Left side -->
+                    <div class="level-left is-marginless">
+                      <div class="level-item">
+                        <p class="number">5</p>
+                        <b>Loan Amount needed</b>
+                      </div>
+                    </div>
+
+                    <!-- Right side -->
+                    <div class="level-right">
+                      <div class="level-item">
+                        <div class="field">
+                          <div class="control has-icons-left ">
+                            <input class="input" id="amount_financed"    onchange="calcform()" onkeyup="cf()" />
+                            <input class="input" id="amount" type="hidden" />
+                            <span class="icon is-small is-left">
+                              <b>R</b>
                             </span>
                           </div>
                         </div>
@@ -58,20 +145,21 @@
                     <div class="level-left is-marginless">
                       <div class="level-item">
                         <p class="number">2</p>
-                        Interest Rate
+                        <b>Interest Rate %</b>
                       </div>
                     </div>
 
                     <!-- Right side -->
+                    
                     <div class="level-right">
                       <div class="level-item">
                         <div class="field">
-                          <div class="control has-icons-right">
-                            <input class="input" id="interest" type="number" />
-                            <span class="icon is-small is-right">
-                              <i class="fa fa-percentage"></i>
-                              
+                          <div class="control has-icons-left">
+                            <input class="input" id="interest" type="number" value="12"   onchange="calcform()" onkeyup="cf()" />
+                            <span class="icon is-small is-left">
+                              <b>%</b>
                             </span>
+ 
                           </div>
                         </div>
                       </div>
@@ -82,7 +170,7 @@
                     <div class="level-left is-marginless">
                       <div class="level-item">
                         <p class="number">3</p>
-                        Number Of Years
+                        <b>Number Of Months</b>
                       </div>
                     </div>
 
@@ -91,10 +179,16 @@
                       <div class="level-item">
                         <div class="field">
                           <div class="control has-icons-left">
-                            <input class="input" id="years" type="number" />
-                            <span class="icon is-small is-left">
-                              <i class="fa fa-calendar"></i>
-                            </span>
+                            <select  style=" width: 220px;" class="input"  name="payment_term" id="payment_term" onchange="calcform()" onkeyup="cf()">
+                              <option value="12">12 </option>
+                              <option value="24"> 24 </option>
+                              <option value="36"> 36 </option>
+                              <option value="48"> 48 </option>
+                              <option value="54"> 54 </option>
+                              <option value="60" selected> 60 </option>
+                              <option value="72"> 72 </option>
+               S           </select>
+
                           </div>
                         </div>
                       </div>
@@ -102,11 +196,13 @@
                   </div>
 
                   <div class="control">
-                    <button
-                      class="button is-large is-fullwidth is-primary is-outlined"
-                    >
-                      Calculate
-                    </button>
+                    <!-- Calcualte space -->
+                    <div class="column is-12-tablet is-6-desktop is-3-widescreen">
+                      <div class="notification is-primary has-text">
+                        <p id="monthlyPayment" class="title is-1">R</p>
+                        <p class="subtitle is-4">Monthly Payments</p>
+                      </div>
+                    </div>
                   </div>
                 </form>
               </div>
@@ -119,17 +215,12 @@
 
     <!-- RESULTS -->
     <section class="section"> 
-      <h1 class="title ">Calculated Results</h1>
+      <!-- <h1 class="title ">Calculated Results</h1> -->
 <div class="columns is-multiline">
   
-  <div class="column is-12-tablet is-6-desktop is-3-widescreen">
-    <div class="notification is-primary has-text">
-      <p id="monthlyPayment" class="title is-1">$</p>
-      <p class="subtitle is-4">Monthly Payments</p>
-    </div>
-  </div>
+  
 
-    <div class="column is-12-tablet is-6-desktop is-3-widescreen">
+    <!-- <div class="column is-12-tablet is-6-desktop is-3-widescreen">
         <div class="notification is-info has-text">
           <p id="totalInterest" class="title is-1">%</p>
           <p class="subtitle is-4">Total Interest</p>
@@ -141,7 +232,7 @@
           <p id="totalPayment" class="title is-1">$</p>
           <p class="subtitle is-4">Total Amount</p>
         </div>
-      </div>
+      </div> -->
 
 </div>
 </section>
