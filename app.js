@@ -29,9 +29,11 @@ function calcform()
     loan_amount = checkNumber(document.getElementById("loan_amount").value);
     deposit = checkNumber(document.getElementById("deposit").value);
     trade_in = checkNumber(document.getElementById("trade_in").value);
+    
+    
     balloon = checkNumber(document.getElementById("balloon").value);
     // alert(deposit);
-    amount_financed = loan_amount - deposit - trade_in - balloon;
+    amount_financed = loan_amount - deposit - trade_in;
     
     if (amount_financed < 0)
     {
@@ -44,6 +46,27 @@ function calcform()
     // alert(amount_financed_display);
     document.getElementById("amount_financed").value = amount_financed_display;
     document.getElementById("amount").value = amount_financed;
+
+    // Balloon amount
+    // alert("balloon");
+
+    selbox  = document.getElementById("balloon_percentage");
+    idx = selbox.selectedIndex;
+    balloon_percentage = selbox.options[idx].value;
+    // alert(balloon_percentage);
+    balloon_amount = amount_financed * (balloon_percentage/100)
+    // alert(balloon_amount);
+    // nfObject  = new Intl.NumberFormat('en-US');
+    nfObject1  = new Intl.NumberFormat('en-US');
+    balloon_amount_display = nfObject1.format(balloon_amount);
+    
+    document.getElementById("balloon").value = balloon_amount;
+    document.getElementById("balloon_display").value = balloon_amount_display;
+    
+
+
+
+  
     // alert("Calckform1");
     // calculate 
     computeResults(document.getElementById("loan-form"));
@@ -60,8 +83,10 @@ function computeResults() {
   const UIinterest = document.getElementById("interest").value;
 
   // Calculate
-  
-  const principal = parseFloat(UIamount);
+  balloon = document.getElementById("balloon").value;
+
+  principal =  parseFloat(UIamount - balloon);     
+
   const CalculateInterest = parseFloat(UIinterest) / 100 / 12;
   selbox  = document.getElementById("payment_term");
   idx = selbox.selectedIndex;
@@ -71,14 +96,16 @@ function computeResults() {
   //Compute monthly Payment
   const x = Math.pow(1 + CalculateInterest, calculatedPayments);
   const monthly = (principal * x * CalculateInterest) / (x - 1);
-  const monthlyPayment = monthly.toFixed(2);
+  monthlywith_balloon = monthly + (balloon *CalculateInterest);
+
+  const monthlyPayment = monthlywith_balloon.toFixed(2);
   //Compute Interest
 
   const totalInterest = (monthly * calculatedPayments - principal).toFixed(2);
 
   //Compute Total Payment
 
-  const totalPayment = (monthly * calculatedPayments).toFixed(2);
+//   const totalPayment = (monthly * calculatedPayments).toFixed(2);
 
   //Show results
   nfObject  = new Intl.NumberFormat('en-US');
